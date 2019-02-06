@@ -27,6 +27,18 @@ function get_random_int(min, max, exclude=undefined)
 
 function activate(context) 
 {
+	let disposable = vscode.commands.registerCommand('extension.show_fortune', () => 
+	{
+		show_fortune()
+	})
+
+	context.subscriptions.push(disposable)
+
+	show_fortune()
+}
+
+function show_fortune()
+{
 	let fortune = fortunes[get_random_int(0, fortunes.length)]
 	vscode.window.setStatusBarMessage(fortune, message_timeout)
 }
